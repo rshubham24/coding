@@ -1,0 +1,13 @@
+                                                            Graph
+
+R: BFS and DFS- The time complexity of BFS & DFS is O(V + E), where V is the number of nodes and E is the number of edges.
+
+R: Dijsktra's doesn't work for graph with negative weight edges. Bellman-Ford algorithm work for graph with negative edges.
+
+R: In a graph, a vertex is called an Articulation point if removing it and all the edges associated with it results in the increase of the number of connected components in the graph.
+
+R: Biconnected Graph - If removal of any one vertex does not result in increase of connected components then it is called biconnected graph.
+
+R: Strong Connected Component - A directed component is strongly connected if there is a dircted path from any vertex to any other vertex.
+
+R: 
