@@ -11,22 +11,16 @@ int main(){
 	}
 	int dp[n];
 	dp[0] = 1;
-	int max1, k = 1;
 	for(int i = 1; i < n; i++){
-		max1 = INT_MIN;
-		for(int j = i-1; j >= 0; j--){
-			if(a[j] < a[i]){
-				max1 = max(max1, dp[j]);
+		dp[i] = 1;
+		for(int j = 0; j < i; j++){
+			if(a[i] > a[j] && dp[i] < dp[j] + 1){
+				dp[i] = dp[j] + 1;
 			}
 		}
-		if(max1 != INT_MIN){
-			dp[i] = max1 + 1;
-		}
-		else{
-			dp[i] = 1;
-		}
-		k = max(k, dp[i]);
 	}
-	cout << k;
-    return 0;
+	cout << *max_element(dp, dp+n);
+	return 0;
 }
+
+//O(n^2)

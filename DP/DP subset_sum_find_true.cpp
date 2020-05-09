@@ -12,9 +12,7 @@ bool subset_sum(int a[], int sum, int n){
 	}
 	for(int i = 1; i <= n; i++){
 		for(int j = 1; j <= sum; j++){
-			if(j < a[i-1]){
-				subset[i][j] = subset[i-1][j];
-			}
+			subset[i][j] = subset[i-1][j];
 			if(j >= a[i-1]){
 				subset[i][j] = subset[i-1][j] || subset[i-1][j - a[i-1]];
 			}

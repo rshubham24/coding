@@ -1,31 +1,57 @@
+// Recursive
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int coin_change(vector<int> &a, int n, int k, int i, int sum){
+	if(i == n){
+		return 0;
+	}
+	int ans = 0;
+	if(sum == k){
+		return ans + 1;
+	}
+	else if(sum > k){
+		return 0;
+	}
+	else{
+		ans = coin_change(a, n, k, i, sum + a[i]) + coin_change(a, n, k, i+1, sum);
+	}
+	return ans;
+}
+
+int main(){
+	int n, k;
+	cin >> n >> k;
+	vector<int> a(n);
+	for(int i = 0; i < n; i++){
+		cin >> a[i];
+	}
+	cout << coin_change(a, n, k, 0, 0);
+	return 0;
+}
+
+// DP
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
 int main(){
-	int a[4] = {2, 3, 5, 6};
-	int r[11][4];
-	for(int i = 0; i < 4; i++){
-		r[0][i] = 1;
+	int n, k;
+	cin >> n >> k;
+	vector<int> a(n);
+	for(int i = 0; i < n; i++){
+		cin >> a[i];
 	}
-	int x, y;
-	for(int i = 1; i < 11; i++){
-		for(int j = 0; j < 4; j++){
-			if((i-a[j]) >= 0){
-				x = r[i-a[j]][j];
-			}
-			else{
-				x = 0;
-			}
-			if(j >= 1){
-				y = r[i][j-1];
-			}
-			else{
-				y = 0;
-			}
-			r[i][j] = x + y;
+	vector<int> dp(k+1, 0);
+	dp[0] = 1;
+	for(int i = 0; i < n; i++){
+		for(int j = a[i]; j <= k; j++){
+			dp[j] += dp[j-a[i]];
 		}
 	}
-	cout << r[10][3];
+	cout << dp[k];
 	return 0;
 }
