@@ -20,7 +20,7 @@ int edit_distance(string s, string r, int m, int n){
 				dp[i][j] = dp[i-1][j-1];
 			}
 			else{
-				dp[i][j] = 1 + min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]);
+				dp[i][j] = 1 + min1(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]);
 			}
 		}
 	}
@@ -28,14 +28,10 @@ int edit_distance(string s, string r, int m, int n){
 }
 
 int main(){
-	int t;
-	cin >> t;
-	for(int j = 0; j < t; j++){
 		string s, r;
 		cin >> s;
 		cin >> r;
 		int q = s.size(), p = r.size();
 		cout << edit_distance(s, r, q, p) << endl; 
-	}
     return 0;
 }

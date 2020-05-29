@@ -1,0 +1,50 @@
+// x&1 = 0 (if x is even)
+
+
+// x&1 = 1 (if x is odd)
+
+
+// x is divisible by 2^k exactly when (x & (2^k - 1) = 0)
+
+
+// (x << k) appends k zero bits to the number and (x >> k) removes last k bits from the number. Eg - 14 << 2 = 56 (Bit Representation of 14 is 1110 and 56 is 111000), 49 >> 3 (Bit Representation of 49 is 110001 and 6 is 110). Note that x << k corresponds to multiplication of x by 2^k, x >> k corresponds to dividing x by 2 k rounded down to an integer.
+
+
+// If i need to print bit reprsentation of a number we can do it by following method : 
+	for(int k = 31; k >= 0; k--){
+		if (x&(1<<k)) cout << "1";
+		else cout << "0";
+	} 
+
+
+// If we want to create a long long bit mask then we can do it by following method : (1LL << k)
+
+
+// Representing sets :
+	Since int is a 32-bit type, an int number can represent any subset of the set {0, 1, 2, . . . , 31}. The bit representation of the set {1, 3, 4, 8} is 00000000000000000000000100011010. method to represent : 
+		int x = 0;
+		x |= (1 << 1);
+		x |= (1 << 3);
+		x |= (1 << 4);
+		x |= (1 << 8);
+	Following code prints all the elements of a set:
+		for(int i = 0; i < 32; i++){
+			if(x&(1<<i)) cout << "i" << " ";
+		}
+
+
+// Set Operations :
+	For example, the following code first constructs the sets x = {1, 3, 4, 8} and y = {3, 6, 8, 9} and then constructs the set z = x ∪nion y = {1, 3, 4, 6, 8, 9}.
+	• x union y = x|y;
+	• x intersection y = x&y;
+	• complement x = ~x;
+	• Difference x/y = x&(~y);
+
+
+// Additional functions:
+	• __builtin_clz(x): the number of zeros at the beginning of the bit representation.
+	• __builtin_ctz(x): the number of zeros at the end of the bit representation.
+	• __builtin_popcount(x): the number of ones in the bit representation.
+	• __builtin_parity(x): the parity (even or odd) of the number of ones in the bit representation.
+
+

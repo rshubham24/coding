@@ -63,6 +63,8 @@ int main(){
 	int dis[nodes];
 	for(int i = 0; i < edges; i++){
 		cin >> x >> y >> weight;
+		x--;
+		y--;
 		a[x].push_back(make_pair(y, weight));
 		a[y].push_back(make_pair(x, weight));
 	}

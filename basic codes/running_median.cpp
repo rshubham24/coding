@@ -1,111 +1,84 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+//using namespace std::chrono;
 
-multiset<long long int> a;
-multiset<long long int> b; 
-multiset<long long int>::iterator it, it1;
+int mod = 1000000007;
+
+typedef long long ll;
+#define f first
+#define s second
+#define mp make_pair
+#define pb push_back
+#define p pair<int, int>
+#define v vector<int>
+#define vl vector<long long>
+#define vb vector<bool>
+#define vs vector<string>
+#define vp vector<pair<int, int>>
+#define vv vector<v>
+#define vpl vector<pair<long long, long long>>
+#define vvl vector<vl>
+#define vvp vector<vp>
+multiset<int> a, b;
 
 void check(){
-    int n = a.size(), m = b.size();
-    if(m == n + 1){
-        a.insert(*b.begin());
+    int y;
+    if(b.size() > a.size()){
+        y = *b.begin();
+        a.insert(y);
         b.erase(b.begin());
     }
-    if(n == m + 2){
-        it = a.end();
+    else if(a.size() > (b.size() + 1)){
+        y = *a.rbegin();
+        b.insert(y);
+        auto it = a.end();
         it--;
-        b.insert(*it);
         a.erase(it);
     }
 }
 
-void insert(int x){
-    if(a.empty() && b.empty()){
+void median(int x, int size){
+    if(a.size() == 0 && b.size() == 0){
         a.insert(x);
     }
-    else if(!a.empty() && b.empty()){
+    else if(b.size() == 0){
         if(x >= *a.begin()){
             b.insert(x);
         }
         else{
-            long long int t = *a.begin();
+            int y = *a.begin();
             a.erase(a.begin());
             a.insert(x);
-            b.insert(t);
+            b.insert(y);
         }
     }
     else{
-        it = b.begin();
-        if(x <= *it){
-            a.insert(x);
-        }
-        else{
+        if(x >= *b.begin()){
             b.insert(x);
         }
+        else{
+            a.insert(x);
+        }
     }
     check();
-    if(a.size() != b.size()){
-        cout << *a.rbegin() << endl; 
+    if(size%2 == 0){
+        int d = (*a.rbegin() + *b.begin())/2;
+        cout << d;
     }
     else{
-        long long int e = (*a.rbegin() + *b.begin());
-        if(e%2 == 0){
-            cout << e/2 << endl;
-        }
-        else{
-            cout << e/2 << ".5" << endl;
-        }
-    }
-}
-
-void remove(int x){
-    it = a.find(x);
-    it1 = b.find(x);
-    if(it == a.end() && it1 == b.end()){
-        cout << "Wrong!" << endl;
-        return;
-    }
-    else if(it == a.end() && it1 != b.end()){
-        b.erase(it1);
-    }
-    else if(it1 == b.end() && it != a.end()){
-        a.erase(it);
-        }
-    else if(it1 != b.end() && it != a.end()){
-        a.erase(it);
-    }
-    check();
-    if(a.size() == 0 && b.size() == 0){
-        cout << "Wrong!" << endl;
-    }
-    else if(a.size() != b.size()){
-        cout << *a.rbegin() << endl; 
-    }
-    else{
-        long long int e = (*a.rbegin() + *b.begin());
-        if(e%2 == 0){
-            cout << e/2 << endl;
-        }
-        else{
-            cout << e/2 << ".5" << endl;
-        }
+        cout << *a.rbegin();
     }
 }
 
 int main(){
-    int n;
-    long long int x;
-    char c;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int n, x;
     cin >> n;
     for(int i = 0; i < n; i++){
-        cin >> c >> x;
-        if(c == 'a'){
-            insert(x);
-        }
-        if(c == 'r'){
-            remove(x);
-        }
+        cin >> x;
+        median(x, i+1);
     }
     return 0;
 }
