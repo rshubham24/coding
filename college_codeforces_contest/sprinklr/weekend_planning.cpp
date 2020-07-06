@@ -63,7 +63,8 @@ void dijikstra(p state, int k){
 
 int main(){
     ios_base::sync_with_stdio(false);
-    int m, k;
+ 	cin.tie(NULL);
+	int m, k;
     cin >> n >> m >> k;
  	a = vvp(n);
  	int x, y, w;
@@ -75,6 +76,5 @@ int main(){
  		a[y].pb(mp(x, w));
  	}
  	dijikstra({0, k}, k);
-    cin.tie(NULL);
     return 0;
 }
